@@ -139,10 +139,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="http://yoursite-url/about/">
+  <link rel="canonical" href="http://yoursite-url/computer_network/DNS-因特网的目录服务/">
   <title>
     
-      About - zhaoyuuu的博客
+      DNS: 因特网的目录服务 - zhaoyuuu的博客
     
   </title>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -300,29 +300,7 @@
           <!-- LangSelect -->
           
           
-          <!-- LangSelect start -->
-          <!-- LangSelect -->
-<li>
-  <a id="lang-select-label"><i class="fa fa-globe"></i>
-    <span>
-      简体中文
-    </span>
-    <select id="lang-select" data-canonical="about/index.html">
-      
-      
-      <option value="cn"  selected >
-        简体中文
-      </option>
-      
-      <option value="en" >
-        English
-      </option>
-      
-    </select>
-  </a>
-</li>
-
-          <!-- LangSelect end -->
+          
           
           
         </ul>
@@ -374,19 +352,19 @@
     .body--light {
       /* intro-header */
       --intro-header-background-image-url-home: url('/img/header_img/home.jpg');
-      --intro-header-background-image-url-post: url('img/header_img/about.jpg');
-      --intro-header-background-image-url-page: url('/img/header_img/about.jpg');
+      --intro-header-background-image-url-post: url('/img/header_img/network.jpg');
+      --intro-header-background-image-url-page: url('//img/header_img/network.jpg');
     }
     .body--dark {
       --intro-header-background-image-url-home: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/img/header_img/home.jpg');
-      --intro-header-background-image-url-post: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('img/header_img/about.jpg');
-      --intro-header-background-image-url-page: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/img/header_img/about.jpg');
+      --intro-header-background-image-url-post: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/img/header_img/network.jpg');
+      --intro-header-background-image-url-page: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('//img/header_img/network.jpg');
     }
 
     header.intro-header {
-       /*page*/
-        background-image: var(--intro-header-background-image-url-page);
-        /* background-image: url('/img/header_img/about.jpg'); */
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url('/img/header_img/network.jpg'); */
       
     }
 
@@ -404,10 +382,42 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="site-heading">
-            <h1>About</h1>
-            <!--<hr class="small">-->
-            <span class="subheading">那些年吹过的牛逼，还有很多没有实现 ......</span>
+          <div class="post-heading">
+            <div class="tags">
+              
+              <a class="tag" href="/tags/#Computer network" title="Computer network">Computer network</a>
+              
+            </div>
+            <h1>DNS: 因特网的目录服务</h1>
+            <h2 class="subheading">参考自：《计算机网络·自顶向下方法(第七版)》</h2>
+            <span class="meta">
+              Posted by zhaoyuuu on
+              2022-11-15
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">7</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">2.1k</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
           </div>
           
         </div>
@@ -448,255 +458,361 @@
 	Friends Blog、
 	anchorjs、
 	) -->
-		<!-- Main Content -->
-<div class="container">
-  <div class="row">
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
+
+        <blockquote>
+<p>参考资料是《计网·自顶向下(第七版)》，第 2.4 节。</p>
+</blockquote>
+<h2 id="前言">前言</h2>
+<p><strong>人类</strong>能以多种方式来标识，在生活中大家喜欢用 <strong>“名字”</strong> 来标识，在登记酒店的时候用 <strong>“身份证号”</strong> 来标识…<br /><br>
+<strong>因特网上的主机</strong>和人类一样，有多种（两种）方式来标识：</p>
+<ol>
+<li>主机名  hostname</li>
+<li>IP地址  IP_address</li>
+</ol>
+<h2 id="DNS提供的服务">DNS提供的服务</h2>
+<p>在主机的两种标识中，<strong>人们</strong>喜欢便于记忆的<em>主机名方式</em>，而<strong>路由器</strong>喜欢 <em>定长的、有层次结构的IP地址。</em> 自然地，我们需要一种<strong>能进行主机名到IP地址转换的目录服务</strong>，which is <strong>域名解析系统（DNS Domain Name System）</strong> 的主要任务！</p>
+<blockquote>
+<p>注意这里是<strong>主要</strong>任务，而不是全部任务，让我看看是哪个小傻瓜以为这就是DNS的全部功能？<br>
+…<br>
+这个傻子就是我…</p>
+</blockquote>
+<h3 id="介绍一下DNS">介绍一下DNS</h3>
+<p>DNS是：</p>
+<ol>
+<li>一个由<strong>分层</strong>的<strong>DNS服务器（DNS server）<strong>实现的</strong>分布式数据库</strong></li>
+<li>一个使得主机能够查询分布式数据库的<strong>应用层协议</strong></li>
+</ol>
+<blockquote>
+<p>DNS是应用层协议: 1. 使用<strong>客户-服务器</strong>模式运行在通信的端系统之间 2. 在端系统之间通过下面的端到端运输协议来传送DNS报文<br>
+与其他应用程序的显著不同是：DNS不是一个直接和用户打交道的应用，相反，DNS为“用户应用”及其他软件提供核心功能——主机名到IP的转换</p>
+</blockquote>
+<ol start="3">
+<li>DNS协议运行在<strong>UDP</strong>之上，使用53号端口</li>
+</ol>
+<p>因特网体系结构的<strong>复杂性</strong>大多位于网络的 <strong>“边缘”</strong>。DNS就是这种设计原理的一个典型范例，DNS通过采用<strong>位于网络边缘的客户和服务器</strong>，实现了关键的名字到IP的转换功能。</p>
+<h3 id="所以DNS都有哪些服务">所以DNS都有哪些服务</h3>
+<p>总结放前面：</p>
+<ol>
+<li>主机名到IP的转换</li>
+<li>主机别名</li>
+<li>邮件服务器别名</li>
+<li>负载分配</li>
+</ol>
+<p>可以看到，除了“耳朵都听出茧”的<strong>主机名到IP的转换</strong>外，DNS还提供了一些重要的服务，我将依次展开。</p>
+<h3 id="主机别名-host-aliasing">主机别名(host aliasing)</h3>
+<p>复杂的主机能拥有一个/多个别名。<br />例如，一台名为 <code>relay1.west-coast.enterprise.com</code> 的主机，可能有两个别名 <code>enterprise.com</code> 和 <code>www.enterprise.com</code> 。这种情况下，<code>relay1.west-coast.enterprise.com</code> 称为<strong>规范主机名</strong>。跟规范主机名相比，主机别名更好记忆。<br />应用程序可以调用DNS来<strong>获得主机别名对应的规范主机名以及主机的IP地址</strong>。</p>
+<h3 id="邮件服务器别名-mail-server-aliasing">邮件服务器别名(mail server aliasing)</h3>
+<p>人们也希望电子邮箱地址好记忆，所以跟上面的主机别名差不多的，电子邮箱应用程序可以调用DNs来对别名进行解析，以获得该主机的规范主机名和IP。</p>
+<h3 id="负载分配-load-distribution">负载分配(load distribution)</h3>
+<p>繁忙的站点会被分布在多台服务器上，每台服务器都有不同的IP，因此<strong>同一个规范主机名对应一个IP地址集合</strong>，DNS服务器中存储着这些IP。<br />当用户发出DNS请求的时候，DNS server 用这个IP集合进行响应，但<strong>在每个回答中循环这些地址次序</strong>。用户通常总是向IP地址排在最前面的地址发送HTTP请求，因此DNS就在这些服务器之间循环分配了负载。</p>
+<blockquote>
+<p>DNS的循环同样可以用于邮件服务器</p>
+</blockquote>
+<h2 id="DNS工作机理概述">DNS工作机理概述</h2>
+<p>我们首先来假设下面这一场景：在因特网上只使用一个DNS服务器，该服务器包含有所有的映射。这种<strong>集中式</strong>的设计非常简单，但是如今因特网里有着数量巨大的主机，这种集中式设计会有以下四个问题：</p>
+<ol>
+<li><strong>单点故障（a single point of failure）</strong>。如果这个服务器崩溃，那么整个因特网都将瘫痪。</li>
+<li><strong>通信容量（traffic volume）</strong>。单个DNS服务器处理所有的DNS查询，恐怖的通信容量。</li>
+<li><strong>远距离的集中式数据库（distant centralized database）</strong>。肯定会出现的情况是：这个单个的服务器距离一些主机太远（可能是地球的另一侧），这将导致严重的时延。</li>
+<li><strong>维护（maintenance）</strong>。这个单个服务器不得不为所有的主机保留记录，导致中央数据库庞大，还要频繁添加新主机。</li>
+</ol>
+<h3 id="分布式、层次数据库">分布式、层次数据库</h3>
+<p>为了处理<strong>扩展性</strong>问题，DNS使用了大量的DNS服务器，它们以层次方式组织，并且分布在全世界范围内。<br />在DNS服务器的层次结构中，有<strong>三类</strong>DNS服务器：</p>
+<ol>
+<li><strong>根DNS服务器</strong>。有400多个根服务器遍及全世界，由13个不同的组织管理。<strong>根服务器提供TLD（顶级域）服务器的IP</strong>。</li>
+<li><strong>顶级域服务器</strong>。对于每个顶级域（com / org / edu /…）和所有国家的顶级域（uk / fr / jp /…），都有TLD服务器。<strong>TLD服务器提供了权威DNS服务器的IP</strong>。</li>
+<li><strong>权威DNS服务器</strong>。多数大学和大公司实现和维护它们自己基本和辅助（备份）的权威DNS服务器。</li>
+</ol>
+<p>还有一类万万不可忽视的DNS服务器：<strong>本地DNS服务器</strong>，虽然严格来说不属于服务器的层次结构，但是它对于服务器的层次结构至关重要。每个ISP都有一台本地DNS服务器。</p>
+<blockquote>
+<p>对于某居民ISP来说，本地DNS服务器可能就与主机在同一个局域网中。当主机发出DNS请求时，该请求被发往本地DNS服务器，它起着<strong>代理</strong>的作用，并将该请求转发到DNS服务器层次结构中。</p>
+</blockquote>
+<p>下面是一个简单的例子：主机 <code>cse.nyu.edu</code>想知道主机<code>gaia.cs.umass.edu</code>的IP地址。请求主机、本地DNS 以及 各DNS服务器层次结构的交互如下图所示：<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/26315149/1668499330216-1dbc647f-592b-4feb-9827-040bfb3e363e.png#averageHue=%23cfcfcf&amp;clientId=u4bd1aa1d-0be3-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=paste&amp;height=414&amp;id=u4b5c4342&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=737&amp;originWidth=483&amp;originalType=url&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=177516&amp;status=done&amp;style=none&amp;taskId=u5357c09f-304b-49b5-b823-a528d88db7b&amp;title=&amp;width=271" alt="image.png"></p>
+<blockquote>
+<p>在本例中，为了获得一台主机名的映射，一共发送了8份DNS报文: 4份查询报文 + 4份回答报文。<br>
+我们假设TLD服务器知道用于主机的权威DNS服务器的IP地址，但这种假设并不总是正确的！如果TLD只是知道中间某个DNS服务器，该服务器依次才能知道权威服务器，那么将多发送起码2份报文。</p>
+</blockquote>
+<p><strong>递归查询：</strong> 上个例子里，请求主机和本地DNS服务器之间就是递归查询，即“直接告诉我最后结果”。<br /><strong>迭代查询：</strong> 上个例子中的其他请求是迭代查询，即“告诉我下一个DNS服务器的IP地址”。</p>
+<h3 id="DNS缓存">DNS缓存</h3>
+<p>为了<strong>改善时延性能并减少在因特网上到处传输的DNS报文数量</strong>，DNS广泛使用了缓存技术。<br />例如，还是在上面的例子中，每当本地DNS服务器接收到一个回答，它能够缓存该回答的信息。缓存时常默认为两天，即两天之后将丢弃缓存的信息。</p>
+<blockquote>
+<p>事实上，因为缓存，除了少数的DNS查询以外，根服务器被绕过了。</p>
+</blockquote>
+<h2 id="DNS记录和报文">DNS记录和报文</h2>
+<p>所有DNS服务器存储了<strong>资源记录（Resource Record, RR）</strong>，RR提供了主机名到IP的映射。<br />RR是一个包含了如下字段的四元组：<strong><code>( Name, Value, Type, TTL )</code></strong> <br /><strong>TTL</strong>是该记录的生存时间，它决定了该记录应当从缓存中删除的时间。<br /><br>
+<strong>Name</strong> 和 <strong>Value</strong> 的值取决于 <strong>Type</strong> ：</p>
+<ul>
+<li>type = A。name是主机名，value是该主机名对应的IP。（标准的映射）</li>
+<li>type = NS。name是个域（<a target="_blank" rel="noopener" href="http://foo.com">foo.com</a>），value是知道如何获得该域中主机IP和权威DNS服务器的主机名。该记录用于沿着查询链来路由DNS查询。</li>
+<li>type = CNAME。value是别名为 Name 的主机对应的<strong>规范主机名</strong>。</li>
+<li>type = MX。value是别名为 Name 的邮件服务器对应的<strong>规范主机名</strong>。</li>
+</ul>
+<h3 id="DNS报文">DNS报文</h3>
+<p>略（暂时）</p>
+<h3 id="在DNS数据库中插入记录">在DNS数据库中插入记录</h3>
+<p>略（暂时）</p>
+<blockquote>
+<p>最后，DNS安全吗？<br>
+答案是：安全，十分健壮。（跟DNS的缓存机制关系密切）</p>
+</blockquote>
+
+
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
+          
+          
+          <li class="next">
+            <a href="/computer_network/简要谈谈TCP的安全性/" data-toggle="tooltip" data-placement="top" title="简要谈谈TCP的安全性">Next Post &rarr;</a>
+          </li>
+          
+        </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+      如果您喜欢此博客或发现它对您有用，则欢迎对此发表评论。 也欢迎您共享此博客，以便更多人可以参与。 如果博客中使用的图像侵犯了您的版权，请与作者联系以将其删除。 谢谢 ！
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=DNS: 因特网的目录服务&body=Hi,I found this website and thought you might like it http://yoursite-url/computer_network/DNS-因特网的目录服务/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+  <!-- gitalk start -->
+  <!-- Docs:https://github.com/gitalk/gitalk/blob/master/readme-cn.md -->
+
+  <div id="gitalk-container"></div>
+
+  
+    <!-- <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.js"></script> -->
+    <script src="/js/comment/gitalk.js"></script>
+  
+
+  <script>
+    var gitalk = new Gitalk({
+      clientID: '',
+      clientSecret: '',
+      repo: '',
+      owner: '',
+      admin: '',
+      id: 'Tue Nov 15 2022 13:43:21 GMT+0800', // Ensure uniqueness and length less than 50
+      distractionFreeMode: false, // Facebook-like distraction free mode
+      perPage: 10,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      language: 'zh-CN',
+      proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token'
+    });
+    gitalk.render('gitalk-container');
+
+    var gtFolded = () => {
+      setTimeout(function () {
+        let markdownBody = document.getElementsByClassName("markdown-body");
+        let list = Array.from(markdownBody);
+        list.forEach(item => {
+          if (item.clientHeight > 250) {
+            item.classList.add('gt-comment-body-folded');
+            item.style.maxHeight = '250px';
+            item.title = 'Click to Expand';
+            item.onclick = function () {
+              item.classList.remove('gt-comment-body-folded');
+              item.style.maxHeight = '';
+              item.title = '';
+              item.onclick = null;
+            };
+          }
+        })
+      }, 800);
+    }
+  </script>
+
+  <!-- gitalk end -->
+
+
+<!-- 2. gitment comment -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
+      </div>
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">目录</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#DNS%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">DNS提供的服务</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8BDNS"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">介绍一下DNS</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%89%80%E4%BB%A5DNS%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%9C%8D%E5%8A%A1"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">所以DNS都有哪些服务</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%B8%BB%E6%9C%BA%E5%88%AB%E5%90%8D-host-aliasing"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">主机别名(host aliasing)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%AB%E5%90%8D-mail-server-aliasing"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">邮件服务器别名(mail server aliasing)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%88%86%E9%85%8D-load-distribution"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">负载分配(load distribution)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#DNS%E5%B7%A5%E4%BD%9C%E6%9C%BA%E7%90%86%E6%A6%82%E8%BF%B0"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">DNS工作机理概述</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81%E5%B1%82%E6%AC%A1%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">分布式、层次数据库</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#DNS%E7%BC%93%E5%AD%98"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">DNS缓存</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#DNS%E8%AE%B0%E5%BD%95%E5%92%8C%E6%8A%A5%E6%96%87"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">DNS记录和报文</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#DNS%E6%8A%A5%E6%96%87"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">DNS报文</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9C%A8DNS%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E6%8F%92%E5%85%A5%E8%AE%B0%E5%BD%95"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">在DNS数据库中插入记录</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
     
 
-    <!-- USE SIDEBAR -->
-    <!-- Post Container -->
-    <div class="
+
+
+      <!-- Sidebar Container -->
+      <div class="
                 col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
-      <h2 id="Talk-To-Me">Talk To Me</h2>
-<blockquote>
-<p>I always say to myself :</p>
-<p>if my life is peaceful and plain sailing all the time ,</p>
-<p>it means to die in the electrocardiogram …</p>
-</blockquote>
-<h2 id="Just-Me">Just Me</h2>
-<p><img src="/img/scenery/about_bg2.jpg" width="350" alt="about_bg2"></img></p>
-<blockquote>
-<p>有一种状态 叫一个人 它总是挑战语言的贫乏 只能在某首歌中找寻灵感；</p>
-<p>有一种氨基酸 叫多巴胺 你不知道它何时会在你体内产生；</p>
-<p>有一种上瘾 叫抽烟 其实你抽的只是心情 又或是寂寞；</p>
-<p>有一种态度 叫纹身 其实我们只是想与众不同；</p>
-<p>有一种经历 叫旅行 年轻只有一次 不出去走走 或许以为眼前的就是世界；</p>
-<p>有一种人生 叫心电图 如果你总是一帆风顺 那么你就挂了；</p>
-<p>有一种悠闲 叫 &quot; 老板给我杯Cappuccino &quot; 香香甜甜 浓郁中带着苦涩 醇和而隽永 …</p>
-</blockquote>
-<h2 id="The-Longest-Way-…">The Longest Way …</h2>
-<p><img src="/img/scenery/about_bg4.jpg" width="350" alt="about_bg4"></img></p>
-<blockquote>
-<p>活在当下 然后忘记 继续往前走 …</p>
-<p>即便是一个人 …</p>
-<p>On the way to meet myself …</p>
-</blockquote>
-<h2 id="Follow-With-Interest-Blogs">Follow With Interest Blogs</h2>
-<blockquote>
-<p>Neo Peng：<a target="_blank" rel="noopener" href="https://zhile.io">https://zhile.io</a></p>
-<p>李卫民：<a target="_blank" rel="noopener" href="https://www.funtl.com/zh/guide">https://www.funtl.com/zh/guide</a></p>
-<p>duanxz：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/duanxz/tag">https://www.cnblogs.com/duanxz/tag</a></p>
-<p>Java1234_小锋：<a target="_blank" rel="noopener" href="http://blog.java1234.com/index.html">http://blog.java1234.com/index.html</a></p>
-<p>Deserts：<a target="_blank" rel="noopener" href="https://deserts.io">https://deserts.io</a></p>
-<p>Super Snail：<a target="_blank" rel="noopener" href="https://www.dusign.net">https://www.dusign.net</a></p>
-<p>KIERAN’S BLOG：<a target="_blank" rel="noopener" href="https://go.kieran.top">https://go.kieran.top</a></p>
-<p>Mr.Seven：<a target="_blank" rel="noopener" href="https://itimetraveler.github.io">https://itimetraveler.github.io</a></p>
-</blockquote>
-<h2 id="Contact-me">Contact me</h2>
-<blockquote>
-<p>Email：601521821@qq.com</p>
-</blockquote>
-<h2 id="Treat-me-to-coffee">Treat me to coffee</h2>
-<blockquote>
-<p>If you feel that what I have written is of some value to you, I am glad that you are willing to invite me to drink coffee…</p>
-</blockquote>
-<p><img src="/img/scenery/treat_me_to_coffee.png" width="350" alt="treat_me_to_coffee.png"></img></p>
-
-
-      <!-- 如果开启评论功能 -->
-      
-      <hr>
-
-      
-
-      
-      
-    </div>
-
-    <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Visitors -->
-<h5><a href="/">来访者</a></h5>
-
-<div class="widget">
-  <span>
-    Viewed <b><i><span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span></i></b> Times
-  </span>
-  <br />
-  <span>
-    <b><i><span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span></i></b> Visitors In Total
-  </span>
-</div>
-
-
-        <hr>
-    
         <!-- Featured Tags -->
+        
+        <section>
+          <!-- no hr -->
+          <h5>
+            <a href="/tags/">特色标签</a>
+          </h5>
+          <div class="tags">
+            
+            <a class="tag" href="/tags/#Computer network" title="Computer network">Computer network</a>
+            
+          </div>
+        </section>
+        
 
-<section>
-  <h5><a href="/tags/">特色标签</a></h5>
-  <div class="tags">
-    
-    
-    
-    
-    <a href="/tags/#Computer network" title="Computer network" rel="2">Computer network</a>
-    
-    
+        <!-- Friends Blog -->
+        
+        <hr>
+        <h5>链友</h5>
+        <ul class="list-inline">
+
+          
+          <li>
+            <a href="https://v-vincen.life/" target="_blank">V_Vincen</a>
+          </li>
+          
+          <li>
+            <a href="http://beantech.org" target="_blank">Bean Tech</a>
+          </li>
+          
+          <li>
+            <a href="http://huangxuan.me" target="_blank">Hux Blog</a>
+          </li>
+          
+          <li>
+            <a href="https://hexo.io/" target="_blank">Hexo</a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
   </div>
-</section>
+</article>
 
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-  <h5><a href="/about/">关于自己</a></h5>
-  <div class="short-about">
 
-    
-    <img id="avatar_pic" src="/img/avatar/me_in_aquarium.jpg" alt="avatar_pic" style="box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -moz-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);" />
-    
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
 
-    
-    <p>一个直球的人</p>
-    
+<!-- anchorjs end -->
 
-    <!-- SNS Link -->
-    <ul class="list-inline">
-      
-
-      
-      <li>
-        <a target="_blank" href="https://github.com/V-Vincen">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      
-
-      
-      <li>
-        <a target="_blank" href="https://twitter.com/V_Vincen_">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      
-
-      
-      <li>
-        <a target="_blank" href="https://www.instagram.com/v_vincen_">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      
-
-      
-
-      
-
-      
-
-      
-      <li>
-        <a target="_blank" href="http://weibo.com/WVincen">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      
-
-    </ul>
-  </div>
-</section>
-
-        <hr>
-    
-        <!-- RECENT POSTS -->
-
-<h5><a href="/">最近博文</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="../computer_network/DNS-%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9A%84%E7%9B%AE%E5%BD%95%E6%9C%8D%E5%8A%A1/">
-      <li>DNS: 因特网的目录服务</li>
-    </a>
-    
-    <a href="../computer_network/%E7%AE%80%E8%A6%81%E8%B0%88%E8%B0%88TCP%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7/">
-      <li>简要谈谈TCP的安全性</li>
-    </a>
-    
-    <a href="../cn/Hexo-Theme-LiveMyLife/">
-      <li>Hexo-Theme-LiveMyLife</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Archives -->
-
-<h5><a href="/archives/">archives</a></h5>
-<div class="widget">
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">November 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li></ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Categories -->
-
-<h5><a href="/categories/">categories</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="/categories/#Hexo-Theme-LiveMyLife">
-      <li>Hexo-Theme-LiveMyLife</li>
-    </a>
-    
-    <a href="/categories/#Fundamentals of Computer">
-      <li>Fundamentals of Computer</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-</div>
-
-
-    
-  </div>
-</div>
 
 
 		<!-- Footer (contains ThemeColor、viewer) -->
