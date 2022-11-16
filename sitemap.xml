@@ -2,56 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite-url/computer_network/DNS-%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9A%84%E7%9B%AE%E5%BD%95%E6%9C%8D%E5%8A%A1/</loc>
+    <loc>http://www.zhaoyuuu.com/tags/index.html</loc>
+    
+    <lastmod>2022-11-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.zhaoyuuu.com/categories/index.html</loc>
+    
+    <lastmod>2022-11-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.zhaoyuuu.com/computer_network/DNS-%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9A%84%E7%9B%AE%E5%BD%95%E6%9C%8D%E5%8A%A1/</loc>
     
     <lastmod>2022-11-15</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite-url/tags/index.html</loc>
-    
-    <lastmod>2022-11-14</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite-url/categories/index.html</loc>
-    
-    <lastmod>2022-11-14</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite-url/computer_network/%E7%AE%80%E8%A6%81%E8%B0%88%E8%B0%88TCP%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7/</loc>
+    <loc>http://www.zhaoyuuu.com/computer_network/%E7%AE%80%E8%A6%81%E8%B0%88%E8%B0%88TCP%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7/</loc>
     
     <lastmod>2022-11-13</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite-url/404.html</loc>
+    <loc>http://www.zhaoyuuu.com/archive/index.html</loc>
     
     <lastmod>2022-11-12</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite-url/cn/Hexo-Theme-LiveMyLife/</loc>
+    <loc>http://www.zhaoyuuu.com/404.html</loc>
+    
+    <lastmod>2022-11-12</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.zhaoyuuu.com/cn/Hexo-Theme-LiveMyLife/</loc>
     
     <lastmod>2020-04-16</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite-url/archive/index.html</loc>
-    
-    <lastmod>2017-03-20</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite-url/about/index.html</loc>
+    <loc>http://www.zhaoyuuu.com/about/index.html</loc>
     
     <lastmod>2016-04-20</lastmod>
     
@@ -59,23 +59,23 @@
   
 
   <url>
-    <loc>http://yoursite-url/</loc>
-    <lastmod>2022-11-15</lastmod>
+    <loc>http://www.zhaoyuuu.com/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>http://yoursite-url/tags/Hexo-Theme-LiveMyLife/</loc>
-    <lastmod>2022-11-15</lastmod>
+    <loc>http://www.zhaoyuuu.com/tags/Hexo-Theme-LiveMyLife/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite-url/tags/Computer-network/</loc>
-    <lastmod>2022-11-15</lastmod>
+    <loc>http://www.zhaoyuuu.com/tags/Computer-network/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -83,15 +83,15 @@
 
   
   <url>
-    <loc>http://yoursite-url/categories/Hexo-Theme-LiveMyLife/</loc>
-    <lastmod>2022-11-15</lastmod>
+    <loc>http://www.zhaoyuuu.com/categories/Hexo-Theme-LiveMyLife/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite-url/categories/Fundamentals-of-Computer/</loc>
-    <lastmod>2022-11-15</lastmod>
+    <loc>http://www.zhaoyuuu.com/categories/Fundamentals-of-Computer/</loc>
+    <lastmod>2022-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
