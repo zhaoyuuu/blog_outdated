@@ -116,6 +116,10 @@
     
 
     
+      <!-- gitment start -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css"/>
+      <!-- gitment end -->
+    
 
     
       <!-- gitalk start -->
@@ -139,7 +143,7 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="http://zhaoyuuu.com/undefined/视频流和内容分发网-CDN/">
+  <link rel="canonical" href="http://zhaoyuuu.com/computer_network/视频流和内容分发网-CDN/">
   <title>
     
       视频流和内容分发网(CDN) - zhaoyuuu的博客
@@ -400,11 +404,11 @@
             <!-- WordCount start -->
             <div class="blank_box"></div>
             <span class="meta">
-              Estimated Reading Time <span class="post-count">2</span> Minutes
+              Estimated Reading Time <span class="post-count">5</span> Minutes
             </span>
             <div class="blank_box"></div>
             <span class="meta">
-              Words <span class="post-count">694</span> In Total
+              Words <span class="post-count">1.6k</span> In Total
             </span>
             <div class="blank_box"></div>
             <!-- WordCount end -->
@@ -469,28 +473,46 @@
         <blockquote>
 <p>参考资料是《计网·自顶向下(第七版)》，第 2.6 节。</p>
 </blockquote>
-<h2 id="前言">前言</h2>
-<h3 id="视频带来的挑战">视频带来的挑战</h3>
-<p>事先录制的流式视频现在是北美住宅ISP的流量主体，<code>Netflix</code>和<code>youtube</code>在2015年分别消耗了住宅ISP流量的<code>37%</code>和<code>16%</code>。<br /><code>高比特率</code>是视频非常突出的特征，对于网络来说，这是<strong>巨大的流量和存储</strong>。<br />到目前为止，对流式视频最为重要的性能度量是<strong>平均端到端吞吐量</strong>，即：<strong><em>服务器怎么向百万用户同时提供流化视频内容？</em></strong></p>
-<h3 id="质量等级">质量等级</h3>
-<p>相同的视频可以通过压缩生成多个版本，每个版本对应不同的质量等级。例如，同一个视频我们可以生成3个版本，比特率为300kbps 1Mbps和3Mbps。然后使用3G的用户可能选择300kbps版本，而具有告诉因特网连接的用户选择3Mbps版本。</p>
-<h2 id="HTTP流和DASH">HTTP流和DASH</h2>
-<h3 id="HTTP流">HTTP流</h3>
-<p>视频存储在HTTP服务器中作为一个普通的文件，每个文件有一个特定的url。当用户请求这个url时，服务器以底层网络协议和流量条件允许的尽可能快的速率，在一个HTTP响应报文中发送该视频文件。客户将字节收集在应用缓存中，一旦缓存的字节超过预先设定的门限，用户应用程序就开始播放，同时缓存该视频后面部分的帧。</p>
-<h3 id="DASH">DASH</h3>
-<blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="视频带来的挑战"><a href="#视频带来的挑战" class="headerlink" title="视频带来的挑战"></a>视频带来的挑战</h3><p>事先录制的流式视频现在是北美住宅ISP的流量主体，<code>Netflix</code>和<code>youtube</code>在2015年分别消耗了住宅ISP流量的<code>37%</code>和<code>16%</code>。<br /><code>高比特率</code>是视频非常突出的特征，对于网络来说，这是<strong>巨大的流量和存储</strong>。<br />到目前为止，对流式视频最为重要的性能度量是<strong>平均端到端吞吐量</strong>，即：<strong><em>服务器怎么向百万用户同时提供流化视频内容？</em></strong></p>
+<h3 id="质量等级"><a href="#质量等级" class="headerlink" title="质量等级"></a>质量等级</h3><p>相同的视频可以通过压缩生成多个版本，每个版本对应不同的质量等级。例如，同一个视频我们可以生成3个版本，比特率为300kbps 1Mbps和3Mbps。然后使用3G的用户可能选择300kbps版本，而具有告诉因特网连接的用户选择3Mbps版本。</p>
+<h2 id="HTTP流和DASH"><a href="#HTTP流和DASH" class="headerlink" title="HTTP流和DASH"></a>HTTP流和DASH</h2><h3 id="HTTP流"><a href="#HTTP流" class="headerlink" title="HTTP流"></a>HTTP流</h3><p>视频存储在HTTP服务器中作为一个普通的文件，每个文件有一个特定的url。当用户请求这个url时，服务器以底层网络协议和流量条件允许的尽可能快的速率，在一个HTTP响应报文中发送该视频文件。客户将字节收集在应用缓存中，一旦缓存的字节超过预先设定的门限，用户应用程序就开始播放，同时缓存该视频后面部分的帧。</p>
+<h3 id="DASH"><a href="#DASH" class="headerlink" title="DASH"></a>DASH</h3><blockquote>
 <p>既然已经有了HTTP流，为什么要有DASH呢？——尽管HTTP流在实践中已经得到广泛部署，但是有一个严重的缺陷，即<strong>所有用户接收到相同编码的视频</strong>。这个问题在DASH中迎刃而解。</p>
 </blockquote>
 <p>DASH（Dynamic Adaptive Streaming over HTTP）基于 HTTP流 研发，被称为<strong>经HTTP的动态适应性流</strong>。<br />在DASH中，视频编码为<strong>几个不同的版本</strong>，每个版本具有不同的比特率，对应于不同的质量水平，供用户根据当前的带宽选择。<br />每个视频版本存储在HTTP服务器中，每个版本都有一个不同的url。HTTP服务器中也有一个<strong>告示文件（ manifest file ）</strong>，为每个版本提供了一个url及其比特率。<br />实际操作：</p>
 <ol>
 <li>用户首先请求告示文件得知各种各样的版本</li>
 <li>用户通过HTTP GET 请求报文中对每块指定一个url和一个字节范围，一次选择一块</li>
-<li>下载块的同时，用户测量接收带宽，并通过一个<em>速率决定算法</em>来选择下次请求的块（高/低比特率版本）</li>
-</ol>
-<blockquote>
+<li>下载块的同时，用户测量接收带宽，并通过一个<em>速率决定算法</em>来选择下次请求的块（高/低比特率版本）<blockquote>
 <p>因此，DASH允许客户自由的在不同的质量等级之间切换。</p>
 </blockquote>
-<h2 id="内容分发网-CDN">内容分发网-CDN</h2>
+</li>
+</ol>
+<h2 id="内容分发网-CDN"><a href="#内容分发网-CDN" class="headerlink" title="内容分发网-CDN"></a>内容分发网-CDN</h2><p>几乎所有的视频流公司都利用<strong>内容分发网（Content Distribution Network, CDN）</strong>。CDN管理分布在多个地理位置上的服务器，在这些服务器上存储文件的副本，并且试图将每个用户请求定向到一个将提供最好服务的CDN位置。</p>
+<h3 id="CDN服务器安置原则"><a href="#CDN服务器安置原则" class="headerlink" title="CDN服务器安置原则"></a>CDN服务器安置原则</h3><h4 id="一、深入"><a href="#一、深入" class="headerlink" title="一、深入"></a>一、深入</h4><p>通过在遍及全球的接入<strong>ISP</strong>中部署服务器集群来深入到ISP的接入网中。<br />目标是<strong>靠近端用户</strong>，通过<strong>减少端用户和CDN集群之间链路和路由器的数量</strong>，从而<strong>改善时延和吞吐量</strong>。</p>
+<blockquote>
+<p>但由于这种高度分布式设计，维护和管理集群的任务成为挑战。</p>
+</blockquote>
+<h4 id="二、邀请做客"><a href="#二、邀请做客" class="headerlink" title="二、邀请做客"></a>二、邀请做客</h4><p>通过<strong>在少量关键位置建造大集群来邀请ISP做客。</strong><br />这些CDN通常将他们的集群放在<strong>因特网交换点（IXP）</strong>中。与深入设计原则相比，邀请做客通常产生较低的维护、管理开销，但可能以对端用户较高的时延和吞吐量为代价。</p>
+<h3 id="CDN操作"><a href="#CDN操作" class="headerlink" title="CDN操作"></a>CDN操作</h3><p>当用户向一个视频URL发起请求的时候，CDN需要截获这个请求，以便能够：</p>
+<ol>
+<li>确定适合用于该用户的CDN服务器集群</li>
+<li>将用户的请求重定向到该集群的某台服务器</li>
+</ol>
+<p>我们稍后讨论CDN是如何确定一个适当集群的。接下来，我们首先考察<strong>截获和重定向</strong>所依赖的机制：<br /><strong>大多数CDN利用DNS来截获和重定向。</strong><br />我们举一个例子来说明：一个内容提供商<code>NetCinema</code>，雇佣了第三方CDN公司<code>KingCDN</code>来向其他用户分发视频。在<code>NetCinema</code>的web网页上，每个视频的url都包括字符串<code>&quot;video&quot;</code>。<br /><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/26315149/1668664026939-5b895653-e0a1-4773-a6e1-72a30ce2a6c3.jpeg#averageHue=%23b7b6b1&amp;clientId=u6d382133-b452-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=drop&amp;height=236&amp;id=u35d9290c&amp;margin=%5Bobject%20Object%5D&amp;name=CDn%E6%93%8D%E4%BD%9C.jpg&amp;originHeight=757&amp;originWidth=1130&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=349714&amp;status=done&amp;style=none&amp;taskId=ud9adb7b5-b277-431c-bb45-df4cd6621a9&amp;title=&amp;width=353" alt="CDn操作.jpg"><br />实际的步骤是这样的：</p>
+<ol>
+<li>用户位于<code>NetCinema</code>的web网页</li>
+<li>用户点击链接 <code>http://video.netcinema.com/6Y7B23V</code> 时，用户主机发送了一个对 <code>video.netcinema.com</code> DNS请求</li>
+<li>用户本地服务器将请求中继到Netcinema权威服务器，该服务器观察到字符串“video”，于是返回一个KingCDN内容服务器的IP地址，为了将该DNS请求移交给KingCDN</li>
+<li>LDNS（本地DNS服务器）向KingCDN发送请求，得到KingCDN内容服务器的IP</li>
+<li>LDNS向用户主机转发该内容服务器的IP</li>
+<li>用户主机与内容服务器建立连接，发起HTTP GET请求…</li>
+</ol>
+<h3 id="集群选择策略"><a href="#集群选择策略" class="headerlink" title="集群选择策略"></a>集群选择策略</h3><p>任何CDN部署，其核心是<strong>集群选择策略（cluster selection strategy）</strong>，即动态地将用户定向到CDN中的某个服务器集群或数据中心的机制。<br />我们简单的介绍两个策略，并说明它们的优点和缺点：</p>
+<p>1.指派用户到<strong>地理上最为临近</strong>的集群。</p>
+<p>这样的方案对于大多数用户可以工作的很好，但是对于某些用户来说效果很差。因为就网络路径的跳数和长度来说，地理上最临近的不一定是网络上最临近的集群。<br />这种简单的策略忽略了时延和可用带宽随因特网路径时间而变化，<strong>总是为特定的用户指派相同的集群</strong>。</p>
+<p>2.基于当前的流量条件，<strong>实时测量</strong>得出最适合用户的集群。</p>
+<p>为了基于当前的流量条件为客户决定最好的集群，CDN能够对其集群和用户之间的时延和丢包性能执行周期性的<strong>实时测量</strong>。<br />例如，CDN能够让它的每个集群周期性的向位于全世界的所有LDNS发送探测分组（例如ping / DNS请求 /..）。这种方法的<strong>缺点是许多LDNS被配置为不会响应这些检测</strong>。</p>
 
 
         <hr>
@@ -548,7 +570,7 @@
       </a>
     </li>
     <li class="social-share-li">
-      <a target="_blank" class="social-share-icon" href="mailto:?subject=视频流和内容分发网(CDN)&body=Hi,I found this website and thought you might like it http://zhaoyuuu.com/undefined/视频流和内容分发网-CDN/">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=视频流和内容分发网(CDN)&body=Hi,I found this website and thought you might like it http://zhaoyuuu.com/computer_network/视频流和内容分发网-CDN/">
         <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
       </a>
     </li>
@@ -619,6 +641,61 @@
 
 <!-- 2. gitment comment -->
 
+  <!-- gitment start -->
+  <!-- Docs:https://github.com/imsun/gitment -->
+
+  <div id="blog_comments"></div>
+  <!-- <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"> <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+
+  <script>
+    const myTheme = {
+      render(state, instance) {
+        const container = document.createElement('div')
+        container.lang = "en-US"
+        container.className = 'gitment-container gitment-root-container'
+
+        // your custom component
+        container.appendChild(instance.renderSomething(state, instance))
+        container.appendChild(instance.renderHeader(state, instance))
+        container.appendChild(instance.renderEditor(state, instance))
+        container.appendChild(instance.renderComments(state, instance))
+        container.appendChild(instance.renderFooter(state, instance))
+        return container
+      },
+      renderSomething(state, instance) {
+        const container = document.createElement('div')
+        container.lang = "en-US"
+        container.className = 'hello_visitor'
+        if (state.user.login) {
+          container.innerText = `Hello ${state.user.login}, Welcome to comment system`
+        }
+        return container
+      }
+    }
+
+    const gitment = new Gitment({
+      id: 'Wed Nov 16 2022 19:04:58 GMT+0800', // optional
+      owner: 'zhaoyuuu',
+      repo: 'https://github.com/zhaoyuuu/zhaoyuuu.github.io.git',
+      oauth: {
+        client_id: '',
+        client_secret: ''
+      },
+      desc: '',
+      perPage: '10',
+      maxCommentHeight: '250',
+      theme: myTheme,
+      // ... For more available options, check out the documentation below
+    })
+
+    gitment.render('blog_comments')
+    // or gitment.render(document.getElementById('comments')) or document.body.appendChild(gitment.render())
+  </script>
+
+  <!-- gitment end -->
+
 
 <!-- 3. disqus comment -->
 
@@ -636,7 +713,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">目录</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%A7%86%E9%A2%91%E5%B8%A6%E6%9D%A5%E7%9A%84%E6%8C%91%E6%88%98"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">视频带来的挑战</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%B4%A8%E9%87%8F%E7%AD%89%E7%BA%A7"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">质量等级</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#HTTP%E6%B5%81%E5%92%8CDASH"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">HTTP流和DASH</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#HTTP%E6%B5%81"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">HTTP流</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#DASH"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">DASH</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91-CDN"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">内容分发网-CDN</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%A7%86%E9%A2%91%E5%B8%A6%E6%9D%A5%E7%9A%84%E6%8C%91%E6%88%98"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">视频带来的挑战</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%B4%A8%E9%87%8F%E7%AD%89%E7%BA%A7"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">质量等级</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#HTTP%E6%B5%81%E5%92%8CDASH"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">HTTP流和DASH</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#HTTP%E6%B5%81"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">HTTP流</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#DASH"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">DASH</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91-CDN"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">内容分发网-CDN</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#CDN%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E7%BD%AE%E5%8E%9F%E5%88%99"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">CDN服务器安置原则</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E4%B8%80%E3%80%81%E6%B7%B1%E5%85%A5"><span class="toc-nav-number">3.1.1.</span> <span class="toc-nav-text">一、深入</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E4%BA%8C%E3%80%81%E9%82%80%E8%AF%B7%E5%81%9A%E5%AE%A2"><span class="toc-nav-number">3.1.2.</span> <span class="toc-nav-text">二、邀请做客</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#CDN%E6%93%8D%E4%BD%9C"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">CDN操作</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E9%9B%86%E7%BE%A4%E9%80%89%E6%8B%A9%E7%AD%96%E7%95%A5"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">集群选择策略</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -755,7 +832,7 @@
 
           
             <li>
-              <a target="_blank" href="https://github.com/V-Vincen">
+              <a target="_blank" href="https://github.com/zhaoyuuu">
                 <span class="fa-stack fa-lg">
                   <i class="fa fa-circle fa-stack-2x"></i>
                   <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -765,26 +842,6 @@
           
 
           
-            <li>
-              <a target="_blank" href="https://twitter.com/V_Vincen_">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-          
-
-          
-            <li>
-              <a target="_blank" href="https://www.instagram.com/v_vincen_">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-          
 
           
 
@@ -793,14 +850,7 @@
           
 
           
-            <li>
-              <a target="_blank" href="http://weibo.com/WVincen">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
+
           
 
         </ul>

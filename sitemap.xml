@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://zhaoyuuu.com/undefined/%E8%A7%86%E9%A2%91%E6%B5%81%E5%92%8C%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91-CDN/</loc>
+    <loc>http://zhaoyuuu.com/computer_network/%E8%A7%86%E9%A2%91%E6%B5%81%E5%92%8C%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91-CDN/</loc>
     
     <lastmod>2022-11-16</lastmod>
     
@@ -67,7 +67,7 @@
 
   <url>
     <loc>http://zhaoyuuu.com/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -75,14 +75,14 @@
   
   <url>
     <loc>http://zhaoyuuu.com/tags/Hexo-Theme-LiveMyLife/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhaoyuuu.com/tags/Computer-network/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -91,14 +91,14 @@
   
   <url>
     <loc>http://zhaoyuuu.com/categories/Hexo-Theme-LiveMyLife/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhaoyuuu.com/categories/Fundamentals-of-Computer/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
