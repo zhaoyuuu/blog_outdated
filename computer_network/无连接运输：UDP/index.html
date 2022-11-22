@@ -143,10 +143,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="http://zhaoyuuu.com/about/">
+  <link rel="canonical" href="http://zhaoyuuu.com/computer_network/无连接运输：UDP/">
   <title>
     
-      About - zhaoyuuu的博客
+      无连接运输：UDP - zhaoyuuu的博客
     
   </title>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -304,29 +304,7 @@
           <!-- LangSelect -->
           
           
-          <!-- LangSelect start -->
-          <!-- LangSelect -->
-<li>
-  <a id="lang-select-label"><i class="fa fa-globe"></i>
-    <span>
-      简体中文
-    </span>
-    <select id="lang-select" data-canonical="about/index.html">
-      
-      
-      <option value="cn"  selected >
-        简体中文
-      </option>
-      
-      <option value="en" >
-        English
-      </option>
-      
-    </select>
-  </a>
-</li>
-
-          <!-- LangSelect end -->
+          
           
           
         </ul>
@@ -378,19 +356,19 @@
     .body--light {
       /* intro-header */
       --intro-header-background-image-url-home: url('/img/header_img/home.jpg');
-      --intro-header-background-image-url-post: url('img/header_img/about.jpg');
-      --intro-header-background-image-url-page: url('/img/header_img/about.jpg');
+      --intro-header-background-image-url-post: url('/img/header_img/network.jpg');
+      --intro-header-background-image-url-page: url('//img/header_img/network.jpg');
     }
     .body--dark {
       --intro-header-background-image-url-home: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/img/header_img/home.jpg');
-      --intro-header-background-image-url-post: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('img/header_img/about.jpg');
-      --intro-header-background-image-url-page: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/img/header_img/about.jpg');
+      --intro-header-background-image-url-post: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/img/header_img/network.jpg');
+      --intro-header-background-image-url-page: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('//img/header_img/network.jpg');
     }
 
     header.intro-header {
-       /*page*/
-        background-image: var(--intro-header-background-image-url-page);
-        /* background-image: url('/img/header_img/about.jpg'); */
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url('/img/header_img/network.jpg'); */
       
     }
 
@@ -408,10 +386,42 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="site-heading">
-            <h1>About</h1>
-            <!--<hr class="small">-->
-            <span class="subheading">世界弥漫着焦躁不安的气息，因为每个人都急于从自己的枷锁中解放出来</span>
+          <div class="post-heading">
+            <div class="tags">
+              
+              <a class="tag" href="/tags/#Computer network" title="Computer network">Computer network</a>
+              
+            </div>
+            <h1>无连接运输：UDP</h1>
+            <h2 class="subheading">参考自：《计算机网络·自顶向下方法(第七版)》</h2>
+            <span class="meta">
+              Posted by zhaoyuuu on
+              2022-11-22
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">3</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">921</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
           </div>
           
         </div>
@@ -452,230 +462,354 @@
 	Friends Blog、
 	anchorjs、
 	) -->
-		<!-- Main Content -->
-<div class="container">
-  <div class="row">
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
+
+        <h2 id="前言">前言</h2>
+<p>假如让你设计一个最简单的运输层协议，你会怎么做呢？你可能会设计一个“无所事事”的运输层协议：<strong>发送方</strong>将来自应用进程的数据一股脑直接交给网络层，<strong>接受方</strong>将来自网络层的数据包一股脑直接交给应用进程。<br />但我们应该知道，运输层必须做一点事，而不是什么都不做！<strong>运输层最低限度必须提供一种复用/分解服务</strong>，以便在网络层与正确的应用级进程之间传递数据。</p>
+<h2 id="介绍一下UDP">介绍一下UDP</h2>
+<p><strong>UDP就只是做了运输协议能做的最少工作</strong>。除了<strong>复用/分解</strong>功能及少量的<strong>差错检测</strong>外，它几乎没有对IP增加别的东西。</p>
+<blockquote>
+<p>UDP从应用进程得到数据，附加上用于多路复用/分解服务的 源&amp;目的端口字段，以及两个其他的小字段，然后将形成的报文段交给网络层。<br>
+应用程序的开发人员使用UDP时，该应用程序差不多就是直接与IP打交道。</p>
+</blockquote>
+<p>使用UDP时，在发送报文段之前，发送方和接收方的运输层实体之间没有握手，即<strong>UDP是无连接</strong>的。</p>
+<h3 id="UDP的特点">UDP的特点</h3>
+<ol>
+<li><strong>关于发送什么数据以及何时发送的应用层控制更为精细。<strong>应用进程将网络数据传递给UDP，UDP就会将此数据打包进UDP报文段并</strong>立即</strong>将其传递给网络层。实时应用需要这种低延迟，容人一些数据丢失。</li>
+<li><strong>无须建立连接。</strong> UDP不需要握手，直接传数据，因此UDP不会引入建立连接的时延。</li>
+<li><strong>无连接状态。</strong> 相比于TCP，某服务器如果使用UDP，一般能够支持更多的活跃用户。</li>
+<li><strong>分组首部开销小。</strong> 每个TCP报文段有<strong>20</strong>字节的首部开销，UDP只有<strong>8</strong>字节。</li>
+</ol>
+<blockquote>
+<p>DNS运行在UDP之上，从而避免了TCP的连接创建时延。</p>
+</blockquote>
+<blockquote>
+<p>使用UDP的应用也是可能实现<strong>可靠</strong>数据传输的：在应用程序自身实现可靠性机制（例如Chrome使用的QUIC协议）</p>
+</blockquote>
+<h2 id="UDP报文段结构">UDP报文段结构</h2>
+<p>UDP首部只有4个字段，每个字段由2个字节组成：<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/26315149/1669103195533-82971125-99d8-4d36-a99a-a9ba2468261c.png#averageHue=%23f5f2f2&amp;clientId=u6923b765-c571-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=drop&amp;id=ua53d4c02&amp;margin=%5Bobject%20Object%5D&amp;name=udp-segment-struct.png&amp;originHeight=181&amp;originWidth=279&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=3981&amp;status=done&amp;style=none&amp;taskId=u3118db2e-4bdc-4918-a2a1-f03cb1dfde9&amp;title=" alt="udp-segment-struct.png"><br /><strong>端口号：</strong> 使主机将应用数据交给运行在目的端口系统中的相应进程（复用/分解）<br /><strong>长度：</strong> 包括首部在内的UDP报文段长度<br /><strong>检验和：</strong> 检查该报文中是否出现了差错</p>
+<blockquote>
+<p>下面我们来详细看看 <strong><em>检验和</em></strong> 是什么。</p>
+</blockquote>
+<h2 id="UDP检验和">UDP检验和</h2>
+<p>UDP检验和提供了差错检测功能（数据传导过程中，比特是否发生了变化）。<br /><strong>在发送方：<strong>发送方的UDP对报文段中</strong>所有16比特字的和</strong>进行<strong>反码运算</strong>，求和时遇到的任何溢出都被回卷，这个结果放在UDP报文段的检验和字段里。<br /><strong>在接收方：</strong><em>收到的所有的比特字</em> 和 <em>检验和的比特字</em> <strong>加在一起</strong>，最后结果应该是1111111111111111（16位），否则出错。</p>
+<p>需要注意的是，<strong>即使UDP提供差错检测，它对差错恢复无能为力</strong>。</p>
+<blockquote>
+<p>为什么UDP要提供差错检测呢？<br>
+因为不能保证源和目的之间的<strong>所有链路</strong>都提供差错检测。这是典型的<strong>端到端原则（end-end principle）</strong> 的一个例子，该原则被称颂：<em>“与在较高级别提供这些功能的代价相比，在较低级别设置的功能可能是冗余或者几乎没有价值的。”</em></p>
+</blockquote>
+
+
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
+          
+          
+          <li class="next">
+            <a href="/computer_network/视频流和内容分发网-CDN/" data-toggle="tooltip" data-placement="top" title="视频流和内容分发网(CDN)">Next Post &rarr;</a>
+          </li>
+          
+        </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+      如果您喜欢此博客或发现它对您有用，则欢迎对此发表评论。 也欢迎您共享此博客，以便更多人可以参与。 如果博客中使用的图像侵犯了您的版权，请与作者联系以将其删除。 谢谢 ！
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=无连接运输：UDP&body=Hi,I found this website and thought you might like it http://zhaoyuuu.com/computer_network/无连接运输：UDP/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+  <!-- gitalk start -->
+  <!-- Docs:https://github.com/gitalk/gitalk/blob/master/readme-cn.md -->
+
+  <div id="gitalk-container"></div>
+
+  
+    <!-- <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.js"></script> -->
+    <script src="/js/comment/gitalk.js"></script>
+  
+
+  <script>
+    var gitalk = new Gitalk({
+      clientID: '',
+      clientSecret: '',
+      repo: '',
+      owner: '',
+      admin: '',
+      id: 'Tue Nov 22 2022 16:03:43 GMT+0800', // Ensure uniqueness and length less than 50
+      distractionFreeMode: false, // Facebook-like distraction free mode
+      perPage: 10,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      language: 'zh-CN',
+      proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token'
+    });
+    gitalk.render('gitalk-container');
+
+    var gtFolded = () => {
+      setTimeout(function () {
+        let markdownBody = document.getElementsByClassName("markdown-body");
+        let list = Array.from(markdownBody);
+        list.forEach(item => {
+          if (item.clientHeight > 250) {
+            item.classList.add('gt-comment-body-folded');
+            item.style.maxHeight = '250px';
+            item.title = 'Click to Expand';
+            item.onclick = function () {
+              item.classList.remove('gt-comment-body-folded');
+              item.style.maxHeight = '';
+              item.title = '';
+              item.onclick = null;
+            };
+          }
+        })
+      }, 800);
+    }
+  </script>
+
+  <!-- gitalk end -->
+
+
+<!-- 2. gitment comment -->
+
+  <!-- gitment start -->
+  <!-- Docs:https://github.com/imsun/gitment -->
+
+  <div id="blog_comments"></div>
+  <!-- <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"> <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+
+  <script>
+    const myTheme = {
+      render(state, instance) {
+        const container = document.createElement('div')
+        container.lang = "en-US"
+        container.className = 'gitment-container gitment-root-container'
+
+        // your custom component
+        container.appendChild(instance.renderSomething(state, instance))
+        container.appendChild(instance.renderHeader(state, instance))
+        container.appendChild(instance.renderEditor(state, instance))
+        container.appendChild(instance.renderComments(state, instance))
+        container.appendChild(instance.renderFooter(state, instance))
+        return container
+      },
+      renderSomething(state, instance) {
+        const container = document.createElement('div')
+        container.lang = "en-US"
+        container.className = 'hello_visitor'
+        if (state.user.login) {
+          container.innerText = `Hello ${state.user.login}, Welcome to comment system`
+        }
+        return container
+      }
+    }
+
+    const gitment = new Gitment({
+      id: 'Tue Nov 22 2022 16:03:43 GMT+0800', // optional
+      owner: 'zhaoyuuu',
+      repo: 'https://github.com/zhaoyuuu/zhaoyuuu.github.io.git',
+      oauth: {
+        client_id: '',
+        client_secret: ''
+      },
+      desc: '',
+      perPage: '10',
+      maxCommentHeight: '250',
+      theme: myTheme,
+      // ... For more available options, check out the documentation below
+    })
+
+    gitment.render('blog_comments')
+    // or gitment.render(document.getElementById('comments')) or document.body.appendChild(gitment.render())
+  </script>
+
+  <!-- gitment end -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
+      </div>
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">目录</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8BUDP"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">介绍一下UDP</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#UDP%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">UDP的特点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#UDP%E6%8A%A5%E6%96%87%E6%AE%B5%E7%BB%93%E6%9E%84"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">UDP报文段结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#UDP%E6%A3%80%E9%AA%8C%E5%92%8C"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">UDP检验和</span></a></li></ol>
+        
+        </div>
+      </aside>
     
 
-    <!-- USE SIDEBAR -->
-    <!-- Post Container -->
-    <div class="
+
+
+      <!-- Sidebar Container -->
+      <div class="
                 col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
-      <h2 id="Talk-To-Me"><a href="#Talk-To-Me" class="headerlink" title="Talk To Me"></a>Talk To Me</h2><blockquote>
-<p>I always say to myself :</p>
-<p>if my life is peaceful and plain sailing all the time ,</p>
-<p>it means to die in the electrocardiogram …</p>
-</blockquote>
-<h2 id="Just-Me"><a href="#Just-Me" class="headerlink" title="Just Me"></a>Just Me</h2><p><img src="/img/scenery/about_bg2.jpg" width="350" alt="about_bg2"></img></p>
-<blockquote>
-<p>有一种状态 叫一个人 它总是挑战语言的贫乏 只能在某首歌中找寻灵感；</p>
-<p>有一种氨基酸 叫多巴胺 你不知道它何时会在你体内产生；</p>
-<p>有一种上瘾 叫抽烟 其实你抽的只是心情 又或是寂寞；</p>
-<p>有一种态度 叫纹身 其实我们只是想与众不同；</p>
-<p>有一种经历 叫旅行 年轻只有一次 不出去走走 或许以为眼前的就是世界；</p>
-<p>有一种人生 叫心电图 如果你总是一帆风顺 那么你就挂了；</p>
-<p>有一种悠闲 叫 “ 老板给我杯Cappuccino “ 香香甜甜 浓郁中带着苦涩 醇和而隽永 …</p>
-</blockquote>
-<h2 id="The-Longest-Way-…"><a href="#The-Longest-Way-…" class="headerlink" title="The Longest Way …"></a>The Longest Way …</h2><p><img src="/img/scenery/about_bg4.jpg" width="350" alt="about_bg4"></img></p>
-<blockquote>
-<p> 活在当下 然后忘记 继续往前走 …</p>
-<p> 即便是一个人 …</p>
-<p> On the way to meet myself …</p>
-</blockquote>
-<h2 id="Follow-With-Interest-Blogs"><a href="#Follow-With-Interest-Blogs" class="headerlink" title="Follow With Interest Blogs"></a>Follow With Interest Blogs</h2><blockquote>
-<p>Neo Peng：<a target="_blank" rel="noopener" href="https://zhile.io">https://zhile.io</a></p>
-<p>李卫民：<a target="_blank" rel="noopener" href="https://www.funtl.com/zh/guide">https://www.funtl.com/zh/guide</a></p>
-<p>duanxz：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/duanxz/tag">https://www.cnblogs.com/duanxz/tag</a></p>
-<p>Java1234_小锋：<a target="_blank" rel="noopener" href="http://blog.java1234.com/index.html">http://blog.java1234.com/index.html</a></p>
-<p>Deserts：<a target="_blank" rel="noopener" href="https://deserts.io">https://deserts.io</a></p>
-<p>Super Snail：<a target="_blank" rel="noopener" href="https://www.dusign.net">https://www.dusign.net</a></p>
-<p>KIERAN’S BLOG：<a target="_blank" rel="noopener" href="https://go.kieran.top">https://go.kieran.top</a></p>
-<p>Mr.Seven：<a target="_blank" rel="noopener" href="https://itimetraveler.github.io">https://itimetraveler.github.io</a></p>
-</blockquote>
-<h2 id="Contact-me"><a href="#Contact-me" class="headerlink" title="Contact me"></a>Contact me</h2><blockquote>
-<p>Email：601521821@qq.com</p>
-</blockquote>
-<h2 id="Treat-me-to-coffee"><a href="#Treat-me-to-coffee" class="headerlink" title="Treat me to coffee"></a>Treat me to coffee</h2><blockquote>
-<p> If you feel that what I have written is of some value to you, I am glad that you are willing to invite me to drink coffee…</p>
-</blockquote>
-<p><img src="/img/scenery/treat_me_to_coffee.png" width="350" alt="treat_me_to_coffee.png"></img></p>
-
-
-      <!-- 如果开启评论功能 -->
-      
-      <hr>
-
-      
-
-      
-      
-    </div>
-
-    <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Visitors -->
-<h5><a href="/">来访者</a></h5>
-
-<div class="widget">
-  <span>
-    Viewed <b><i><span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span></i></b> Times
-  </span>
-  <br />
-  <span>
-    <b><i><span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span></i></b> Visitors In Total
-  </span>
-</div>
-
-
-        <hr>
-    
         <!-- Featured Tags -->
+        
+        <section>
+          <!-- no hr -->
+          <h5>
+            <a href="/tags/">特色标签</a>
+          </h5>
+          <div class="tags">
+            
+            <a class="tag" href="/tags/#Computer network" title="Computer network">Computer network</a>
+            
+          </div>
+        </section>
+        
 
-<section>
-  <h5><a href="/tags/">特色标签</a></h5>
-  <div class="tags">
-    
-    
-    
-    
-    <a href="/tags/#Computer network" title="Computer network" rel="4">Computer network</a>
-    
-    
+        <!-- Friends Blog -->
+        
+        <hr>
+        <h5>链友</h5>
+        <ul class="list-inline">
+
+          
+          <li>
+            <a href="https://v-vincen.life/" target="_blank">V_Vincen</a>
+          </li>
+          
+          <li>
+            <a href="http://beantech.org" target="_blank">Bean Tech</a>
+          </li>
+          
+          <li>
+            <a href="http://huangxuan.me" target="_blank">Hux Blog</a>
+          </li>
+          
+          <li>
+            <a href="https://hexo.io/" target="_blank">Hexo</a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
   </div>
-</section>
+</article>
 
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-  <h5><a href="/about/">关于自己</a></h5>
-  <div class="short-about">
 
-    
-    <img id="avatar_pic" src="/img/avatar/me_in_aquarium.jpg" alt="avatar_pic" style="box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -moz-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);" />
-    
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
 
-    
-    <p>不要走在我的后面，因为我可能不会引路；不要走在我前面，因为我可能不会跟随；请走在我的身边，做我的朋友。</p>
-    
+<!-- anchorjs end -->
 
-    <!-- SNS Link -->
-    <ul class="list-inline">
-      
-
-      
-      <li>
-        <a target="_blank" href="https://github.com/zhaoyuuu">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-    </ul>
-  </div>
-</section>
-
-        <hr>
-    
-        <!-- RECENT POSTS -->
-
-<h5><a href="/">最近博文</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="../computer_network/%E6%97%A0%E8%BF%9E%E6%8E%A5%E8%BF%90%E8%BE%93%EF%BC%9AUDP/">
-      <li>无连接运输：UDP</li>
-    </a>
-    
-    <a href="../computer_network/%E8%A7%86%E9%A2%91%E6%B5%81%E5%92%8C%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91-CDN/">
-      <li>视频流和内容分发网(CDN)</li>
-    </a>
-    
-    <a href="../computer_network/DNS-%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9A%84%E7%9B%AE%E5%BD%95%E6%9C%8D%E5%8A%A1/">
-      <li>DNS: 因特网的目录服务</li>
-    </a>
-    
-    <a href="../computer_network/%E7%AE%80%E8%A6%81%E8%B0%88%E8%B0%88TCP%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7/">
-      <li>简要谈谈TCP的安全性</li>
-    </a>
-    
-    <a href="../cn/Hexo-Theme-LiveMyLife/">
-      <li>Hexo-Theme-LiveMyLife</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Archives -->
-
-<h5><a href="/archives/">archives</a></h5>
-<div class="widget">
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2022/11/">November 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li></ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Categories -->
-
-<h5><a href="/categories/">categories</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="/categories/#Hexo-Theme-LiveMyLife">
-      <li>Hexo-Theme-LiveMyLife</li>
-    </a>
-    
-    <a href="/categories/#Fundamentals of Computer">
-      <li>Fundamentals of Computer</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-</div>
-
-
-    
-  </div>
-</div>
 
 
 		<!-- Footer (contains ThemeColor、viewer) -->
