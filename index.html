@@ -478,6 +478,47 @@
   <!-- top end -->
   
 
+  <a href="/browser_principle/导航流程：从输入URL到页面展示，这中间发生了什么/">
+    <h2 class="post-title">
+      导航流程：从输入URL到页面展示，这中间发生了什么
+    </h2>
+    <h3 class="post-subtitle">
+      
+    </h3>
+    <div class="post-content-preview">
+      开门见山
+
+用户输入url并回车
+浏览器进程检查url，组装协议，构成完整的url
+浏览器进程通过进程间通信（IPC）把url请求发送给网络进程
+网络进程接收到url请求后检查本地缓存是否缓存了该请求资源，如果有则将该资源返回给浏览器进程
+如果没有，网络进程向web服务器发起http请求（网络请求），请求流程如下：
+
+进行DNS解析，获取服务器ip地址，端口（端口是通过dns解析获取的吗？这......
+    </div>
+  </a>
+  
+  <p class="post-meta" style="margin: 10px 0;">
+    Posted by zhaoyuuu on
+    2022-11-28
+  </p>
+  <div class="tags">
+    
+    <a href="/tags/#浏览器" title="浏览器">浏览器</a>
+    
+  </div>
+  
+
+</div>
+<hr>
+
+<div class="post-preview">
+  
+  <!-- top start (article top hot config) -->
+  
+  <!-- top end -->
+  
+
   <a href="/computer_network/无连接运输：UDP/">
     <h2 class="post-title">
       无连接运输：UDP
@@ -499,7 +540,7 @@ UDP就只是做了运输协议能做的最少工作。......
   </p>
   <div class="tags">
     
-    <a href="/tags/#Computer network" title="Computer network">Computer network</a>
+    <a href="/tags/#计网" title="计网">计网</a>
     
   </div>
   
@@ -525,8 +566,10 @@ UDP就只是做了运输协议能做的最少工作。......
       
 参考资料是《计网·自顶向下(第七版)》，第 2.6 节。
 
-前言视频带来的挑战事先录制的流式视频现在是北美住宅ISP的流量主体，Netflix和youtube在2015年分别消耗了住宅ISP流量的37%和16%。高比特率是视频非常突出的特征，对于网络来说，这是巨大的流量和存储。到目前为止，对流式视频最为重要的性能度量是平均端到端吞吐量，即：服务器怎么向百万用户同时提供流化视频内容？
-质量等......
+前言
+视频带来的挑战
+事先录制的流式视频现在是北美住宅ISP的流量主体，Netflix和youtube在2015年分别消耗了住宅ISP流量的37%和16%。高比特率是视频非常突出的特征，对于网络来说，这是巨大的流量和存储。到目前为止，对流式视频最为重要的性能度量是平均端到端吞吐量，即：服务器怎么向百万用户同时提供流化视频内容？
+质......
     </div>
   </a>
   
@@ -536,7 +579,7 @@ UDP就只是做了运输协议能做的最少工作。......
   </p>
   <div class="tags">
     
-    <a href="/tags/#Computer network" title="Computer network">Computer network</a>
+    <a href="/tags/#计网" title="计网">计网</a>
     
   </div>
   
@@ -580,7 +623,7 @@ DNS提供的服务
   </p>
   <div class="tags">
     
-    <a href="/tags/#Computer network" title="Computer network">Computer network</a>
+    <a href="/tags/#计网" title="计网">计网</a>
     
   </div>
   
@@ -617,7 +660,7 @@ DNS提供的服务
   </p>
   <div class="tags">
     
-    <a href="/tags/#Computer network" title="Computer network">Computer network</a>
+    <a href="/tags/#计网" title="计网">计网</a>
     
   </div>
   
@@ -710,7 +753,9 @@ Gitee 仓库地址：ht......
     
     
     
-    <a href="/tags/#Computer network" title="Computer network" rel="4">Computer network</a>
+    <a href="/tags/#计网" title="计网" rel="4">计网</a>
+    
+    
     
     
   </div>
@@ -773,6 +818,10 @@ Gitee 仓库地址：ht......
 <div class="widget">
   <ul>
     
+    <a href="browser_principle/%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B%EF%BC%9A%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA%EF%BC%8C%E8%BF%99%E4%B8%AD%E9%97%B4%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/">
+      <li>导航流程：从输入URL到页面展示，这中间发生了什么</li>
+    </a>
+    
     <a href="computer_network/%E6%97%A0%E8%BF%9E%E6%8E%A5%E8%BF%90%E8%BE%93%EF%BC%9AUDP/">
       <li>无连接运输：UDP</li>
     </a>
@@ -789,10 +838,6 @@ Gitee 仓库地址：ht......
       <li>简要谈谈TCP的安全性</li>
     </a>
     
-    <a href="cn/Hexo-Theme-LiveMyLife/">
-      <li>Hexo-Theme-LiveMyLife</li>
-    </a>
-    
   </ul>
 </div>
 
@@ -803,7 +848,7 @@ Gitee 仓库地址：ht......
 
 <h5><a href="/archives/">archives</a></h5>
 <div class="widget">
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/11/">November 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li></ul>
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/11/">November 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li></ul>
 </div>
 
 
@@ -819,8 +864,8 @@ Gitee 仓库地址：ht......
       <li>Hexo-Theme-LiveMyLife</li>
     </a>
     
-    <a href="/categories/#Fundamentals of Computer">
-      <li>Fundamentals of Computer</li>
+    <a href="/categories/#CS/前端基础">
+      <li>CS/前端基础</li>
     </a>
     
   </ul>
