@@ -143,10 +143,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="http://zhaoyuuu.com/tags/Hexo-Theme-LiveMyLife/">
+  <link rel="canonical" href="http://zhaoyuuu.com/JS_foundation/作用域链与词法作用域/">
   <title>
     
-      zhaoyuuu的博客
+      作用域链与词法作用域 - zhaoyuuu的博客
     
   </title>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -304,29 +304,7 @@
           <!-- LangSelect -->
           
           
-          <!-- LangSelect start -->
-          <!-- LangSelect -->
-<li>
-  <a id="lang-select-label"><i class="fa fa-globe"></i>
-    <span>
-      简体中文
-    </span>
-    <select id="lang-select" data-canonical="tags/Hexo-Theme-LiveMyLife/index.html">
-      
-      
-      <option value="cn"  selected >
-        简体中文
-      </option>
-      
-      <option value="en" >
-        English
-      </option>
-      
-    </select>
-  </a>
-</li>
-
-          <!-- LangSelect end -->
+          
           
           
         </ul>
@@ -388,9 +366,9 @@
     }
 
     header.intro-header {
-       /*page*/
-        background-image: var(--intro-header-background-image-url-page);
-        /* background-image: url('/img/header_img/archive.jpg'); */
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url(''); */
       
     }
 
@@ -408,10 +386,40 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="site-heading">
-            <h1>Zhaoyuuu</h1>
-            <!--<hr class="small">-->
-            <span class="subheading">Welcome to zhaoyuuu&#39;s blog!!!</span>
+          <div class="post-heading">
+            <div class="tags">
+              
+            </div>
+            <h1>作用域链与词法作用域</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by zhaoyuuu on
+              2022-12-02
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">3</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">896</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
           </div>
           
         </div>
@@ -452,314 +460,335 @@
 	Friends Blog、
 	anchorjs、
 	) -->
-		<!-- Main Content -->
-<div class="container">
-  <div class="row">
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
+
+        <h2 id="引入：你真的懂作用域链吗？">引入：你真的懂作用域链吗？</h2>
+<p>首先我们来看下面这段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(myName)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> myName = <span class="string">&quot; 极客邦 &quot;</span></span><br><span class="line">    bar()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> myName = <span class="string">&quot; 极客时间 &quot;</span></span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
+<p>你觉得这段代码中的 bar 函数和 foo 函数打印出来的内容是什么？<br />当这段代码执行到 bar 函数内部时，其调用栈的状态图如下所示：<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/26315149/1669995819462-71345bb0-9cd9-472f-83d8-737c4f4a83bf.png#averageHue=%23f7e8e8&amp;clientId=ufb886320-4dae-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=drop&amp;height=356&amp;id=uc85bea9b&amp;margin=%5Bobject%20Object%5D&amp;name=download.png&amp;originHeight=675&amp;originWidth=1142&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=210390&amp;status=done&amp;style=none&amp;taskId=ub332eda3-8e91-4ea8-882f-1619cd60900&amp;title=&amp;width=602" alt="download.png"><br />从图中可以看出，全局执行上下文和 foo 函数的执行上下文中都包含变量 myName，那 bar 函数里面 myName 的值到底该选择哪个呢？<br />也许你的第一反应是按照调用栈的顺序来查找变量，查找方式如下：</p>
+<ol>
+<li>先查找栈顶是否存在 myName 变量，但是这里没有，所以接着往下查找 foo 函数中的变量。</li>
+<li>在 foo 函数中查找到了 myName 变量，这时候就使用 foo 函数中的 myName。</li>
+</ol>
+<p>如果按照这种方式来查找变量，那么最终执行 bar 函数打印出来的结果就应该是“极客邦”。但实际情况并非如此，如果你试着执行上述代码，你会发现打印出来的结果是“极客时间”。为什么会是这种情况呢？要解释清楚这个问题，那么你就需要先搞清楚作用域链了。</p>
+<h2 id="作用域链">作用域链</h2>
+<p>其实在每个执行上下文的变量环境中，都包含了一个外部引用，用来指向外部的执行上下文，我们把这个外部引用称为outer。<br />当一段代码使用了一个变量时，JavaScript 引擎首先会在“当前的执行上下文”中查找该变量， 比如上面那段代码在查找 myName 变量时，如果在当前的变量环境中没有查找到，那么 JavaScript 引擎会继续在 outer 所指向的执行上下文中查找。为了直观理解，你可以看下面这张图：<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/26315149/1669995956590-aae44fea-6b55-4384-ab04-7cf256bb176f.png#averageHue=%23f9e4e3&amp;clientId=ufb886320-4dae-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=drop&amp;id=u6e30a6cc&amp;margin=%5Bobject%20Object%5D&amp;name=download.png&amp;originHeight=797&amp;originWidth=1142&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=201270&amp;status=done&amp;style=none&amp;taskId=u87fcd7d6-2907-4734-ab3d-2c87edaace8&amp;title=" alt="download.png"><br />从图中可以看出，bar 函数和 foo 函数的 outer 都是指向全局上下文的，这也就意味着如果在 bar 函数或者 foo 函数中使用了外部变量，那么 JavaScript 引擎会去全局执行上下文中查找。我们把这个查找的链条就称为作用域链。<br />现在你知道变量是通过作用域链来查找的了，不过还有一个疑问没有解开，foo 函数调用的 bar 函数，那为什么 bar 函数的外部引用是全局执行上下文，而不是 foo 函数的执行上下文？<br />要回答这个问题，你还需要知道什么是<strong>词法作用域</strong>。这是因为在 JavaScript 执行过程中，其作用域链是由词法作用域决定的。</p>
+<h2 id="词法作用域">词法作用域</h2>
+<p>词法作用域就是根据<strong>代码的位置</strong>来决定的！！！<br />上面的例子中，根据词法作用域，foo 和 bar 的上级作用域都是全局作用域，所以如果 foo 或者 bar 函数使用了一个它们没有定义的变量，那么它们会到全局作用域去查找。也就是说，<strong>词法作用域是代码阶段就决定好的，和函数是怎么调用的没有关系。</strong><br />知道了词法作用域，我们最后来看这个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(test)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> test = <span class="number">2</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">let</span> test = <span class="number">3</span></span><br><span class="line">        bar()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> test = <span class="number">1</span></span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果你真的懂了词法作用域，那么就应该轻松的得到正确输出：1</p>
+</blockquote>
+
+
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
+          
+          
+          <li class="next">
+            <a href="/browser_principle/变量提升：JavaScript代码是按顺序执行的吗/" data-toggle="tooltip" data-placement="top" title="变量提升：JavaScript代码是按顺序执行的吗">Next Post &rarr;</a>
+          </li>
+          
+        </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+      如果您喜欢此博客或发现它对您有用，则欢迎对此发表评论。 也欢迎您共享此博客，以便更多人可以参与。 如果博客中使用的图像侵犯了您的版权，请与作者联系以将其删除。 谢谢 ！
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=作用域链与词法作用域&body=Hi,I found this website and thought you might like it http://zhaoyuuu.com/JS_foundation/作用域链与词法作用域/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+  <!-- gitalk start -->
+  <!-- Docs:https://github.com/gitalk/gitalk/blob/master/readme-cn.md -->
+
+  <div id="gitalk-container"></div>
+
+  
+    <!-- <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.js"></script> -->
+    <script src="/js/comment/gitalk.js"></script>
+  
+
+  <script>
+    var gitalk = new Gitalk({
+      clientID: '',
+      clientSecret: '',
+      repo: '',
+      owner: '',
+      admin: '',
+      id: 'Fri Dec 02 2022 23:53:06 GMT+0800', // Ensure uniqueness and length less than 50
+      distractionFreeMode: false, // Facebook-like distraction free mode
+      perPage: 10,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      language: 'zh-CN',
+      proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token'
+    });
+    gitalk.render('gitalk-container');
+
+    var gtFolded = () => {
+      setTimeout(function () {
+        let markdownBody = document.getElementsByClassName("markdown-body");
+        let list = Array.from(markdownBody);
+        list.forEach(item => {
+          if (item.clientHeight > 250) {
+            item.classList.add('gt-comment-body-folded');
+            item.style.maxHeight = '250px';
+            item.title = 'Click to Expand';
+            item.onclick = function () {
+              item.classList.remove('gt-comment-body-folded');
+              item.style.maxHeight = '';
+              item.title = '';
+              item.onclick = null;
+            };
+          }
+        })
+      }, 800);
+    }
+  </script>
+
+  <!-- gitalk end -->
+
+
+<!-- 2. gitment comment -->
+
+  <!-- gitment start -->
+  <!-- Docs:https://github.com/imsun/gitment -->
+
+  <div id="blog_comments"></div>
+  <!-- <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"> <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+
+  <script>
+    const myTheme = {
+      render(state, instance) {
+        const container = document.createElement('div')
+        container.lang = "en-US"
+        container.className = 'gitment-container gitment-root-container'
+
+        // your custom component
+        container.appendChild(instance.renderSomething(state, instance))
+        container.appendChild(instance.renderHeader(state, instance))
+        container.appendChild(instance.renderEditor(state, instance))
+        container.appendChild(instance.renderComments(state, instance))
+        container.appendChild(instance.renderFooter(state, instance))
+        return container
+      },
+      renderSomething(state, instance) {
+        const container = document.createElement('div')
+        container.lang = "en-US"
+        container.className = 'hello_visitor'
+        if (state.user.login) {
+          container.innerText = `Hello ${state.user.login}, Welcome to comment system`
+        }
+        return container
+      }
+    }
+
+    const gitment = new Gitment({
+      id: 'Fri Dec 02 2022 23:53:06 GMT+0800', // optional
+      owner: 'zhaoyuuu',
+      repo: 'https://github.com/zhaoyuuu/zhaoyuuu.github.io.git',
+      oauth: {
+        client_id: '',
+        client_secret: ''
+      },
+      desc: '',
+      perPage: '10',
+      maxCommentHeight: '250',
+      theme: myTheme,
+      // ... For more available options, check out the documentation below
+    })
+
+    gitment.render('blog_comments')
+    // or gitment.render(document.getElementById('comments')) or document.body.appendChild(gitment.render())
+  </script>
+
+  <!-- gitment end -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
+      </div>
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">目录</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%BC%95%E5%85%A5%EF%BC%9A%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%87%82%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%E5%90%97%EF%BC%9F"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">引入：你真的懂作用域链吗？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">作用域链</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">词法作用域</span></a></li></ol>
+        
+        </div>
+      </aside>
     
 
-    <!-- USE SIDEBAR -->
-    <!-- Post Container -->
-    <div class="
+
+
+      <!-- Sidebar Container -->
+      <div class="
                 col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
-      <!-- Main Content -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-0 col-md-10 col-md-offset-1">
-      <!-- 归档列表 -->
-
-      
-
-      <!-- 归档列表 -->
-      
-      <div class="one-tag-list">
-        <span class="fa fa-calendar-times-o listing-seperator" id="2022">
-          <span class="tag-text">2022</span>
-        </span>
-        <ul>
-          
-          <li>
-            11-29
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/browser_principle/变量提升：JavaScript代码是按顺序执行的吗/" style="color: #0085a1">
-              <span>
-                变量提升：JavaScript代码是按顺序执行的吗
-                
-                -- browser_principle
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            11-28
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/browser_principle/导航流程：从输入URL到页面展示，这中间发生了什么/" style="color: #0085a1">
-              <span>
-                导航流程：从输入URL到页面展示，这中间发生了什么
-                
-                -- browser_principle
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            11-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/computer_network/无连接运输：UDP/" style="color: #0085a1">
-              <span>
-                无连接运输：UDP
-                
-                -- computer_network
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            11-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/computer_network/视频流和内容分发网-CDN/" style="color: #0085a1">
-              <span>
-                视频流和内容分发网(CDN)
-                
-                -- computer_network
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            11-15
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/computer_network/DNS-因特网的目录服务/" style="color: #0085a1">
-              <span>
-                DNS: 因特网的目录服务
-                
-                -- computer_network
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            11-13
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/computer_network/简要谈谈TCP的安全性/" style="color: #0085a1">
-              <span>
-                简要谈谈TCP的安全性
-                
-                -- computer_network
-                
-              </span>
-            </a>
-          </li>
-          
-        </ul>
-      </div>
-      
-      <div class="one-tag-list">
-        <span class="fa fa-calendar-times-o listing-seperator" id="2020">
-          <span class="tag-text">2020</span>
-        </span>
-        <ul>
-          
-          <li>
-            04-17
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/cn/Hexo-Theme-LiveMyLife/" style="color: #0085a1">
-              <span>
-                Hexo-Theme-LiveMyLife
-                
-                -- cn
-                
-              </span>
-            </a>
-          </li>
-          
-        </ul>
-      </div>
-      
-    </div>
-  </div>
-</div>
-
-
-      <!-- 如果开启评论功能 -->
-      
-    </div>
-
-    <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Visitors -->
-<h5><a href="/">来访者</a></h5>
-
-<div class="widget">
-  <span>
-    Viewed <b><i><span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span></i></b> Times
-  </span>
-  <br />
-  <span>
-    <b><i><span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span></i></b> Visitors In Total
-  </span>
-</div>
-
-
-        <hr>
-    
         <!-- Featured Tags -->
+        
+        <section>
+          <!-- no hr -->
+          <h5>
+            <a href="/tags/">特色标签</a>
+          </h5>
+          <div class="tags">
+            
+          </div>
+        </section>
+        
 
-<section>
-  <h5><a href="/tags/">特色标签</a></h5>
-  <div class="tags">
-    
-    
-    
-    
-    <a href="/tags/#计网" title="计网" rel="4">计网</a>
-    
-    
-    
-    <a href="/tags/#浏览器" title="浏览器" rel="2">浏览器</a>
-    
-    
-    
-    
+        <!-- Friends Blog -->
+        
+        <hr>
+        <h5>链友</h5>
+        <ul class="list-inline">
+
+          
+          <li>
+            <a href="https://v-vincen.life/" target="_blank">V_Vincen</a>
+          </li>
+          
+          <li>
+            <a href="http://beantech.org" target="_blank">Bean Tech</a>
+          </li>
+          
+          <li>
+            <a href="http://huangxuan.me" target="_blank">Hux Blog</a>
+          </li>
+          
+          <li>
+            <a href="https://hexo.io/" target="_blank">Hexo</a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
   </div>
-</section>
+</article>
 
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-  <h5><a href="/about/">关于自己</a></h5>
-  <div class="short-about">
 
-    
-    <img id="avatar_pic" src="/img/avatar/me_in_aquarium.jpg" alt="avatar_pic" style="box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -moz-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);" />
-    
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
 
-    
-    <p>不要走在我的后面，因为我可能不会引路；不要走在我前面，因为我可能不会跟随；请走在我的身边，做我的朋友。</p>
-    
+<!-- anchorjs end -->
 
-    <!-- SNS Link -->
-    <ul class="list-inline">
-      
-
-      
-      <li>
-        <a target="_blank" href="https://github.com/zhaoyuuu">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-    </ul>
-  </div>
-</section>
-
-        <hr>
-    
-        <!-- RECENT POSTS -->
-
-<h5><a href="/">最近博文</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="../../browser_principle/%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87%EF%BC%9AJavaScript%E4%BB%A3%E7%A0%81%E6%98%AF%E6%8C%89%E9%A1%BA%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%9A%84%E5%90%97/">
-      <li>变量提升：JavaScript代码是按顺序执行的吗</li>
-    </a>
-    
-    <a href="../../browser_principle/%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B%EF%BC%9A%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA%EF%BC%8C%E8%BF%99%E4%B8%AD%E9%97%B4%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/">
-      <li>导航流程：从输入URL到页面展示，这中间发生了什么</li>
-    </a>
-    
-    <a href="../../computer_network/%E6%97%A0%E8%BF%9E%E6%8E%A5%E8%BF%90%E8%BE%93%EF%BC%9AUDP/">
-      <li>无连接运输：UDP</li>
-    </a>
-    
-    <a href="../../computer_network/%E8%A7%86%E9%A2%91%E6%B5%81%E5%92%8C%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91-CDN/">
-      <li>视频流和内容分发网(CDN)</li>
-    </a>
-    
-    <a href="../../computer_network/DNS-%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9A%84%E7%9B%AE%E5%BD%95%E6%9C%8D%E5%8A%A1/">
-      <li>DNS: 因特网的目录服务</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Archives -->
-
-<h5><a href="/archives/">archives</a></h5>
-<div class="widget">
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">November 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li></ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Categories -->
-
-<h5><a href="/categories/">categories</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="/categories/#Hexo-Theme-LiveMyLife">
-      <li>Hexo-Theme-LiveMyLife</li>
-    </a>
-    
-    <a href="/categories/#CS/前端基础">
-      <li>CS/前端基础</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-</div>
-
-
-    
-  </div>
-</div>
 
 
 		<!-- Footer (contains ThemeColor、viewer) -->
